@@ -71,7 +71,7 @@ resource "google_project_iam_binding" "iam_service_account_user" {
 # Output Cloud Build YAML
 resource "local_file" "cloudbuild_yaml" {
   content  = local.cloudbuild_yaml
-  filename = "${var.terraform_subdir}/cloudbuild.yaml"
+  filename = "${path.root}/../../${var.terraform_subdir}/cloudbuild.yaml"
 }
 
 # Outputs
