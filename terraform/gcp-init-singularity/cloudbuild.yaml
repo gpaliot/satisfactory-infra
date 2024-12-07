@@ -1,0 +1,23 @@
+steps:
+  - name: "hashicorp/terraform:light"
+    args:
+      - "init"
+      - "-backend-config=bucket=833dfcb6-9df7-b255-4403-8762a62ff448"
+      - "-backend-config=prefix=terraform/state"
+      - "-chdir=terraform/satisfactory-server"
+
+  - name: "hashicorp/terraform:light"
+    args:
+      - "-chdir=terraform/satisfactory-server"
+      - "plan"
+      - "-out=plan.tfplan"
+
+  - name: "hashicorp/terraform:light"
+    args:
+      - "-chdir=terraform/satisfactory-server"
+      - "apply"
+      - "-auto-approve"
+      - "plan.tfplan"
+
+timeout: "1200s"
+ 
