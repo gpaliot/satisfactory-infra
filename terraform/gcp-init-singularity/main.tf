@@ -68,6 +68,14 @@ resource "google_project_iam_binding" "iam_service_account_user" {
   ]
 }
 
+resource "google_project_iam_binding" "logging_log_writer" {
+  project = var.project_id
+  role    = "roles/logging.logWriter"
+  members = [
+    "serviceAccount:${google_service_account.terraform_sa.email}"
+  ]
+}
+
 # Output Cloud Build YAML
 resource "local_file" "cloudbuild_yaml" {
   content  = local.cloudbuild_yaml
