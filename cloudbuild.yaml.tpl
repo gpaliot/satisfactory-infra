@@ -20,4 +20,6 @@ steps:
       - "plan.tfplan"
 
 timeout: "1200s"
- 
+
+options:
+  logging: CLOUD_LOGGING_ONLY
