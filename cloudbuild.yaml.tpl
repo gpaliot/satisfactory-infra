@@ -8,15 +8,16 @@ steps:
 
   - name: "hashicorp/terraform:light"
     args:
+      - "-chdir=${terraform_subdir}"
       - "plan"
       - "-out=plan.tfplan"
-      - "-chdir=${terraform_subdir}"
 
   - name: "hashicorp/terraform:light"
     args:
+      - "-chdir=${terraform_subdir}"
       - "apply"
       - "-auto-approve"
       - "plan.tfplan"
-      - "-chdir=${terraform_subdir}"
 
 timeout: "1200s"
+ 

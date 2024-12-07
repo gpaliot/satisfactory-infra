@@ -3,12 +3,17 @@ provider "google" {
   region  = var.region
 }
 
-
+resource "random_uuid" "terraform-bucket" {
+}
 
 # Local Variables for Template Substitution
+
 locals {
-  cloudbuild_yaml = templatefile("${path.module}/cloudbuild.yaml.tpl", {
-    bucket_name     = var.bucket_name
+    #cloudbuild_yaml = templatefile("${path.module}/cloudbuild.yaml.tpl", {
+  cloudbuild_yaml = templatefile("c:/Users/u01/Documents/projects/satisfactory-infra/cloudbuild.yaml.tpl", {
+    bucket_name     = random_uuid.terraform-bucket.result
+    github_owner    = var.github_owner
+    github_repo     = var.github_repo
     state_prefix    = var.state_prefix
     terraform_subdir = var.terraform_subdir
   })
@@ -16,7 +21,7 @@ locals {
 
 # Create a Cloud Storage Bucket for Terraform State
 resource "google_storage_bucket" "terraform_state" {
-  name                        = var.bucket_name
+  name                        = random_uuid.terraform-bucket.result
   location                    = var.region
   storage_class               = "STANDARD"
   versioning {

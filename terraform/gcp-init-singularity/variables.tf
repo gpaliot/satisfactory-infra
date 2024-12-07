@@ -1,9 +1,11 @@
 # Variables
+
 variable "project_id" {}
+
 variable "region" {
   default = "eu-west-4"
 }
-variable "bucket_name" {}
+
 variable "state_prefix" {
   default = "terraform/state"
 }
